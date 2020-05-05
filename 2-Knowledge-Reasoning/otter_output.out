@@ -1,0 +1,44 @@
+----- Otter 3.3, August 2003 -----
+The process was started by a Windows user on a Windows machine,
+Mon Dec 04 18:33:19 2017
+The command was "otter".
+
+WARNING: clear(auto) flag already clear.
+clear(auto).
+set(prolog_style_variables).
+set(hyper_res).
+set(factor).
+clear(print_given).
+WARNING: set(print_kept) flag already set.
+set(print_kept).
+assign(stats_level,0).
+assign(max_seconds,10).
+
+list(sos).
+1 [] rdf("ex:Tallinn","id:capital","ex:Estonia").
+2 [] rdf("ex:Paris","id:westof","ex:Warsaw").
+3 [] rdf("ex:Warsaw","id:westof","ex:Tallinn").
+4 [] rdf("ex:Warsaw","id:northof","ex:Bucarest").
+5 [] -rdf(X,"id:westof",Y)| -rdf(Y,"id:westof",Z)|rdf(X,"id:westof",Z).
+6 [] -rdf(X,"id:eastof",Y)| -rdf(Y,"id:eastof",Z)|rdf(X,"id:eastof",Z).
+7 [] -rdf(X,"id:northof",Y)| -rdf(Y,"id:northof",Z)|rdf(X,"id:northof",Z).
+8 [] -rdf(X,"id:southof",Y)| -rdf(Y,"id:southof",Z)|rdf(X,"id:southof",Z).
+9 [] -rdf(X,"id:capital",Y)|rdf(X,"http://dbpedia.org/ontology/type","http://conceptnet5.media.mit.edu/web/c/en/city").
+10 [] -rdf(X,"id:capital",Y)|rdf(X,"http://dbpedia.org/ontology/IN",Y).
+11 [] -rdf(X,"id:capital",Y)|rdf(Y,"http://dbpedia.org/ontology/type","http://conceptnet5.media.mit.edu/web/c/en/country").
+12 [] -rdf(X,"http://dbpedia.org/ontology/type","http://conceptnet5.media.mit.edu/web/c/en/city")| -rdf(X,"http://dbpedia.org/ontology/IN",Y)| -rdf(Y,"http://dbpedia.org/ontology/type","http://conceptnet5.media.mit.edu/web/c/en/country")| -rdf(Y,"http://dbpedia.org/ontology/IN","ex:Europe").
+end_of_list.
+
+======= end of input processing =======
+
+=========== start of search ===========
+** KEPT (pick-wt=4): 13 [hyper,9,1] rdf("ex:Tallinn","http://dbpedia.org/ontology/type","http://conceptnet5.media.mit.edu/web/c/en/city").
+** KEPT (pick-wt=4): 14 [hyper,10,1] rdf("ex:Tallinn","http://dbpedia.org/ontology/IN","ex:Estonia").
+** KEPT (pick-wt=4): 15 [hyper,11,1] rdf("ex:Estonia","http://dbpedia.org/ontology/type","http://conceptnet5.media.mit.edu/web/c/en/country").
+** KEPT (pick-wt=4): 16 [hyper,5,2,3] rdf("ex:Paris","id:westof","ex:Tallinn").
+
+Search stopped because sos empty.
+
+============ end of search ============
+
+Process 0 finished Mon Dec 04 18:33:19 2017

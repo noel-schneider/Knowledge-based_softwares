@@ -1,0 +1,58 @@
+% clear automatic strategy selection
+clear(auto).
+% use capital letters (A,X,T,...) as varsset(prolog_style_variables).
+% select the search strategy
+set(hyper_res). % an alternative is to use set(binary_res).set(factor).
+% select sensible amount of output
+clear(print_given). % uncomment to see input and processset(print_kept).  % this is important: prints all generated and kept clauses
+assign(stats_level, 0).
+% just make it stop after N secsassign(max_seconds, 10).
+list(sos).
+% -----------------------------------------------------------------------------------------------------
+
+rdf("ex:Tallinn", "id:capital", "ex:Estonia").
+
+rdf("ex:Tallinn", "http://dbpedia.org/ontology/IN", "ex:Estonia").
+
+% -----------------------------------------------------------------------------------------------------
+
+% -------- ORIENTATION ----------
+    	% ------- TRANSITIVITY ------
+
+    	  -rdf(X,"id:westof", Y) |
+    	  -rdf(Y,"id:westof", Z) |
+    	  rdf(X,"id:westof",Z).
+
+    	  -rdf(X,"id:eastof", Y) |
+          -rdf(Y,"id:eastof", Z) |
+    	  rdf(X,"id:eastof",Z).
+
+    	  -rdf(X,"id:northof", Y) |
+    	  -rdf(Y,"id:northof", Z) |
+	  rdf(X,"id:northof",Z).
+
+    	  -rdf(X,"id:southof", Y) |
+    	  -rdf(Y,"id:southof", Z) |
+    	  rdf(X,"id:southof",Z).
+
+    % -------- LOCATION -------
+
+    	% ----- CAPITAL ------
+
+    		  -rdf(X,"id:capital", Y) |
+    		  rdf(X,"http://dbpedia.org/ontology/type", "http://conceptnet5.media.mit.edu/web/c/en/city").
+
+    		  -rdf(X,"id:capital", Y) |
+    		  rdf(X,"http://dbpedia.org/ontology/IN", Y).
+
+    		  -rdf(X,"id:capital", Y) |
+    		  rdf(Y,"http://dbpedia.org/ontology/type", "http://conceptnet5.media.mit.edu/web/c/en/country").
+
+    	% ----- EUROPE ------
+
+    		  -rdf(X,"http://dbpedia.org/ontology/type", "http://conceptnet5.media.mit.edu/web/c/en/city") |
+    		  -rdf(X,"http://dbpedia.org/ontology/IN", Y) |
+                 -rdf(Y, "http://dbpedia.org/ontology/type", "http://conceptnet5.media.mit.edu/web/c/en/country") |
+    		  -rdf(Y, "http://dbpedia.org/ontology/IN", "ex:Europe").
+
+    end_of_list.
